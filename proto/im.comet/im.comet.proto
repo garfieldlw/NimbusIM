@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = "im.comet/";
+
+package com.NimbusIM.proto.im.comet;
+
+import "ws/ws.proto";
+
+service ImComet {
+  //push msg to client, 给客户端推送消息
+  rpc PushMsgToSingle (ws.MsgRequest) returns (ws.MsgResponse) {
+  }
+
+  //push msg to client, 给客户端推送群聊消息
+  rpc PushMsgToGroup (ws.MsgRequest) returns (ws.MsgResponse) {
+  }
+
+  //seng msg to user, 发消息给用户
+  rpc SendMsg (ws.MsgRequest) returns (ws.MsgResponse) {
+  }
+}

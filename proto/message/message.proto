@@ -1,0 +1,174 @@
+syntax = "proto3";
+
+option go_package = "message/";
+
+package com.NimbusIM.proto.message;
+
+import "common/common.proto";
+import "ws/ws.proto";
+
+service Message {
+  rpc Insert (MessageInsertRequest) returns (ws.MsgData) {
+  }
+
+  rpc UpdateContentStatus (MessageUpdateContentStatusRequest) returns (common.Empty) {
+  }
+
+  rpc UpdateStatus (MessageUpdateStatusRequest) returns (common.Empty) {
+  }
+
+  rpc UpdatePrivacy (MessageUpdatePrivacyRequest) returns (common.Empty) {
+  }
+
+  rpc ReadAll (MessageReadAllRequest) returns (common.Empty) {
+  }
+
+  rpc UnreadStart (MessageUnreadStartRequest) returns (MessageUnreadStartResponse) {
+  }
+
+  rpc UnreadCount (MessageUnreadCountRequest) returns (MessageUnreadCountResponse) {
+  }
+
+  rpc ReadAllAt (MessageReadAllRequest) returns (common.Empty) {
+  }
+
+  rpc UnreadStartAt (MessageUnreadStartRequest) returns (MessageUnreadStartResponse) {
+  }
+
+  rpc UnreadEndAt (MessageUnreadEndRequest) returns (MessageUnreadEndResponse) {
+  }
+
+  rpc UnreadCountAt (MessageUnreadCountRequest) returns (MessageUnreadCountResponse) {
+  }
+
+  rpc ReadAllSystem (MessageReadAllSystemRequest) returns (common.Empty) {
+  }
+
+  rpc UnreadStartSystem (MessageUnreadStartSystemRequest) returns (MessageUnreadStartResponse) {
+  }
+
+  rpc UnreadCountSystem (MessageUnreadCountSystemRequest) returns (MessageUnreadCountResponse) {
+  }
+
+  rpc DetailById (common.DetailByIdRequest) returns (ws.MsgData) {
+  }
+
+  rpc DetailByIds (common.DetailByIdsRequest) returns (MessageListResponse) {
+  }
+
+  rpc List (MessageListRequest) returns (MessageListResponse) {
+  }
+}
+
+message MessageInsertRequest {
+  int64 id = 1;
+  int64 conversation_id = 2;
+  int64 send_id = 3;
+  int64 receive_id = 4;
+  ws.MsgFromTypeEnum from_type = 5;
+  ws.MsgSessionTypeEnum session_type = 6;
+  ws.MsgContentTypeEnum content_type = 7;
+  ws.MsgContent content = 8;
+  ws.MsgContentStatusEnum content_status = 9;
+  int64 send_time = 10;
+  int32 privacy = 11;
+  int32 status = 12;
+  int64 quote = 13;
+}
+
+message MessageUpdateContentStatusRequest {
+  int64 id = 1;
+  ws.MsgContentStatusEnum content_status = 2;
+}
+
+message MessageUpdateStatusRequest {
+  int64 id = 1;
+  int32 status = 2;
+}
+
+message MessageUpdatePrivacyRequest {
+  int64 id = 1;
+  int32 privacy = 2;
+}
+
+message MessageReadAllRequest {
+  int64 user_id = 1;
+  int64 conversation_id = 2;
+}
+
+message MessageUnreadStartRequest {
+  int64 user_id = 1;
+  int64 conversation_id = 2;
+}
+
+message MessageUnreadEndRequest {
+  int64 user_id = 1;
+  int64 conversation_id = 2;
+}
+
+message MessageUnreadCountRequest {
+  int64 user_id = 1;
+  int64 conversation_id = 2;
+}
+
+message MessageReadAllSystemRequest {
+  int64 user_id = 1;
+  int64 conversation_id = 2;
+  ws.MsgContentTypeEnum content_type = 3;
+}
+
+message MessageUnreadStartSystemRequest {
+  int64 user_id = 1;
+  int64 conversation_id = 2;
+  ws.MsgContentTypeEnum content_type = 3;
+}
+
+message MessageUnreadCountSystemRequest {
+  int64 user_id = 1;
+  int64 conversation_id = 2;
+  ws.MsgContentTypeEnum content_type = 3;
+}
+
+message MessageListRequest {
+  int64 offset = 1;
+  int64 limit = 2;
+  string order = 3;
+  int64 start_id = 4;
+  int64 end_id = 5;
+  int64 send_id = 6;
+  int64 receive_id = 7;
+  ws.MsgFromTypeEnum from_type = 8;
+  ws.MsgSessionTypeEnum session_type = 9;
+  ws.MsgContentTypeEnum content_type = 10;
+  ws.MsgContentStatusEnum content_status = 11;
+  int64 start_send_time = 12;
+  int64 end_send_time = 13;
+  int32 status = 14;
+  int64 start_time = 15;
+  int64 end_time = 16;
+  int64 quote = 17;
+  int64 conversation_id = 18;
+  repeated ws.MsgContentTypeEnum content_types = 19;
+  int32 privacy = 20;
+  int32 version = 21;
+}
+
+message MessageUnreadStartResponse {
+  int64 id = 1;
+}
+
+message MessageUnreadEndResponse {
+  int64 id = 1;
+}
+
+
+message MessageUnreadCountResponse {
+  int64 count = 1;
+}
+
+message MessageListResponse {
+  int64 total = 1;
+  int64 offset = 2;
+  int64 limit = 3;
+  repeated ws.MsgData items = 4;
+}

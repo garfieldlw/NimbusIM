@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+option go_package = "unique/";
+
+package com.NimbusIM.proto.unique;
+
+service Unique {
+  rpc GetUniqueId (Request) returns (Response) {
+  }
+
+  rpc GetUniqueIdInfo (InfoRequest) returns (InfoResponse) {
+  }
+}
+
+message Request {
+  int64 num = 1;
+  BizType biz_type = 2;
+}
+
+message Response {
+  repeated int64 ids = 1;
+}
+
+message InfoRequest {
+  int64 id = 1;
+}
+
+message InfoResponse {
+  int64 id = 1;
+  BizType biz_type = 2;
+  int64 create_time = 3;
+}
+
+
+enum BizType {
+  BizTypeDefault = 0;
+  BizTypeUser = 1;
+  BizTypeGroup = 2;
+  BizTypePost = 3;
+  BizTypeGrpc = 4;
+  BizTypeMessage = 5;
+  BizTypeConversation = 6;
+  BizTypeLog = 7;
+  BizTypeTag = 8;
+  BizTypePush = 9;
+  BizTypeTitle = 10;
+  BizTypeBlind = 11;
+  BizTypeBlindSku = 12;
+  BizTypeBlindItem = 13;
+  BizTypeBlindFund = 14;
+  BizTypeBlindOrder = 15;
+  BizTypeResource = 16;
+  BizTypeAvatarFrame = 17;
+  BizTypeBlindExchange = 18;
+  BizTypeChatBubbleFrame = 19;
+  BizTypeCp = 20;
+  BizTypeCpMessage = 21;
+  BizTypeCpGas = 22;
+  BizTypeUserCp = 23;
+  BizTypeUserAuth = 24;
+  BizTypeAi = 25;
+}

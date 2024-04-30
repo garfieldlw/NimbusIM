@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+option go_package = "ws/";
+
+package com.NimbusIM.proto.ws;
+
+import "common/common.proto";
+
+message MsgRequest {
+  string mid = 1;
+  int64 id = 2;
+  int64 user_id = 3;
+  MsgProtocolEnum protocol = 4;
+  MsgData data = 5;
+}
+
+message MsgResponse {
+  string mid = 1;
+  int64 id = 2;
+  int64 user_id = 3;
+  MsgProtocolEnum protocol = 4;
+  MsgData data = 5;
+  int32 code = 6;
+  string msg = 7;
+}
+
+message MsgData {
+  int64 id = 1;
+  int64 conversation_id = 2;
+  int64 send_id = 3;
+  int64 receive_id = 4;
+  MsgFromTypeEnum from_type = 5;
+  MsgSessionTypeEnum session_type = 6;
+  MsgContentTypeEnum content_type = 7;
+  MsgContent content = 8;
+  MsgContentStatusEnum content_status = 9;
+  int64 send_time = 10;
+  int32 privacy = 11;
+  int32 status = 12;
+  int64 quote = 13;
+  int64 create_time = 14;
+  int64 update_time = 15;
+}
+
+message MsgContent {
+  MsgContentText text = 1;
+  MsgContentImage image = 2;
+  MsgContentAudio audio = 3;
+  MsgContentVideo video = 4;
+  MsgContentAt at = 5;
+  MsgContentRecall recall = 6;
+}
+
+message MsgContentText {
+  string text = 1;
+}
+message MsgContentImage {
+  common.ResourceImage info = 1;
+}
+message MsgContentAudio {
+  common.ResourceAudio info = 1;
+}
+message MsgContentVideo {
+  common.ResourceVideo info = 1;
+}
+message MsgContentAt {
+  string text = 1;
+  repeated int64 user_id = 2;
+}
+message MsgContentRecall{
+  int64 id = 1;
+}
+
+enum MsgSessionTypeEnum {
+  _MsgSessionTypeUnknown = 0;
+  MsgSessionTypeSingle = 1;
+  MsgSessionTypeGroup = 2;
+}
+
+enum MsgFromTypeEnum {
+  _MsgFromTypeUnknown = 0;
+  MsgFromTypeUser = 1;
+  MsgFromTypeSystem = 2;
+}
+
+enum MsgContentTypeEnum {
+  _MsgContentTypeUnknown = 0;
+  MsgContentTypeText = 1;
+  MsgContentTypeImage = 2;
+  MsgContentTypeAudio = 3;
+  MsgContentTypeVideo = 4;
+  MsgContentTypeAt = 5;
+  MsgContentTypeRecall = 6;
+}
+
+enum MsgContentStatusEnum {
+  _MsgContentStatusUnknown = 0;
+  MsgContentStatusNormal = 1;
+  MsgContentStatusRecall = 2;
+}
+
+enum MsgProtocolEnum {
+  _MsgProtocolUnknown = 0;
+  MsgProtocolError = 1;
+  MsgProtocolNormal = 2;
+  MsgProtocolSignal = 3;
+  MsgProtocolKICK = 4;
+}

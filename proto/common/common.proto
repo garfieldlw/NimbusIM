@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+option go_package = "common/";
+
+package com.NimbusIM.proto.common;
+
+message Empty {
+
+}
+
+message DetailByIdRequest {
+  int64 id = 1;
+}
+
+message DetailByIdsRequest {
+  repeated int64 ids = 1;
+}
+
+message ResourceImage {
+  string url = 1;
+  string type = 2;
+  int32 size = 3;
+  int32 width = 4;
+  int32 height = 5;
+  string hash_normal = 6;
+  string hash_compress = 7;
+  int64 resource_id = 8;
+}
+
+message ResourceAudio {
+  string url = 1;
+  string type = 2;
+  int32 size = 3;
+  int32 duration = 4;
+  string hash_normal = 5;
+  string hash_compress = 6;
+  int64 resource_id = 7;
+}
+
+message ResourceVideo {
+  string url = 1;
+  string type = 2;
+  int32 size = 3;
+  int32 duration = 4;
+  string hash_normal = 5;
+  string hash_compress = 6;
+  int64 resource_id = 7;
+  int32 width = 8;
+  int32 height = 9;
+}
